@@ -83,8 +83,8 @@ app.post("/deliveryman",async (req,res)=>
         currentcourier.contact=req.body.contact;
         currentcourier.otp=OTP;
 
-        const sql="INSERT INTO courier(`NAMES`,`CONTACT`,`OTP`,`Time`) VALUES(?)";
-        let values=[req.body.name,req.body.contact,OTP,DeliveryTime];
+        const sql="INSERT INTO courier(`NAMES`,`CONTACT`,`OTP`,`Time`,`selectedDoor`) VALUES(?)";
+        let values=[req.body.name,req.body.contact,OTP,DeliveryTime,""];
 
         let dbData = {};
 
