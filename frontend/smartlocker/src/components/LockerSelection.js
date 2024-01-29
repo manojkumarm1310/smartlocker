@@ -83,7 +83,7 @@ export default function LockerSelection()
         event.preventDefault();
         if(window.confirm("Don't you deliver anything?"))
         {
-                await axios.delete("/LockerSelection").then((data)=>
+                await axios.delete("https://smartlocker-production.up.railway.app/LockerSelection").then((data)=>
                 {
                     Navigate("/");
                 }).catch((err)=>
