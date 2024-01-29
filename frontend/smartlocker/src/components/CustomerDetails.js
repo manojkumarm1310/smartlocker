@@ -20,7 +20,7 @@ export default function CustomerDetails()
     
     useEffect(()=>
     {
-        axios.get("http://localhost:8081/customerDetails").then((data)=>
+        axios.get("https://smartlocker-production.up.railway.app/customerDetails").then((data)=>
         {   
             let selectedDoor=data.data[0].SelectedDoor;
             setlockeddoor(selectedDoor);
@@ -60,7 +60,7 @@ export default function CustomerDetails()
     }
     async function handleCancel()
     {
-            await axios.delete("/customerDetails").then((data)=>
+            await axios.delete("https://smartlocker-production.up.railway.app/customerDetails").then((data)=>
             {
                 Navigate("/");
             }).catch((err)=>
