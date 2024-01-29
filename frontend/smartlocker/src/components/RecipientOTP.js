@@ -26,7 +26,7 @@ export default function RecipientOTP()
         setErrorValidation(errorValidation);
         if(errorValidation.otp==="")
         {
-            await axios.get("/recipientOTP").then((values)=>
+            await axios.get("https://smartlocker-production.up.railway.app/recipientOTP").then((values)=>
             {
                 if(values.data[0].RecipientOTP == input)
                 {
@@ -46,7 +46,7 @@ export default function RecipientOTP()
             })
             if(isOTPTrue)
             {
-                await axios.post("http://localhost:8081/recipientOTP",{RecipientOTP}).then((res)=>
+                await axios.post("https://smartlocker-production.up.railway.app/recipientOTP",{RecipientOTP}).then((res)=>
             {
 
             }).catch((err)=>

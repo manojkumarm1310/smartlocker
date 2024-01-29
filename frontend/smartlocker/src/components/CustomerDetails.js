@@ -48,7 +48,7 @@ export default function CustomerDetails()
         setErrorValidation(ErrorValidation);
         if(ErrorValidation.name==="" && ErrorValidation.contact==="")
         {
-            await axios.post("http://localhost:8081/customerDetails", recipient).then((data)=>
+            await axios.post("https://smartlocker-production.up.railway.app/customerDetails", recipient).then((data)=>
             {
                 Navigate("/")
             }).catch((err)=>

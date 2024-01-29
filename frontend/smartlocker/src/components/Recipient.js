@@ -31,7 +31,7 @@ export default  function Recipient()
         setErrorValidation(ErrorValidation);
         if(ErrorValidation.name=="" && ErrorValidation.contact=="")
         {
-            await axios.post("http://localhost:8081/recipient", recipient).then((Responsedata)=>
+            await axios.post("https://smartlocker-production.up.railway.app/recipient", recipient).then((Responsedata)=>
             {
                 if(Responsedata.data.status==="Success")
                 {

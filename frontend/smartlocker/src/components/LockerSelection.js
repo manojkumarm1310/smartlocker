@@ -16,7 +16,7 @@ export default function LockerSelection()
     {
        if(bool)
        {
-         axios.get("http://localhost:8081/LockerSelection").then((fetchdata)=>
+         axios.get("https://smartlocker-production.up.railway.app/LockerSelection").then((fetchdata)=>
         {
             for(let i=0;i<fetchdata.data.length;i++)
             {
@@ -62,7 +62,7 @@ export default function LockerSelection()
         {
             if(window.confirm("Remember! Have you closed the Locker Door?"))
             {  
-                await axios.post("http://localhost:8081/LockerSelection",{currentSelectedDoor}).then((res)=>
+                await axios.post("https://smartlocker-production.up.railway.app/LockerSelection",{currentSelectedDoor}).then((res)=>
                 {   
                     Navigate("/customerDetails");
                 }).catch((err)=>

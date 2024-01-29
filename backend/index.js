@@ -12,8 +12,8 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended:  true}));
 app.use(express.json());
 
-const API_key= process.env.FASTSMSAPI_APIKEY;
-console.log(API_key);
+
+
 
 
 const urlmysql=`mysql://${process.env.MYSQLUSER}:${process.env.MYSQLPASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQLDATABASE}`;
@@ -23,6 +23,8 @@ console.log(process.env.MYSQLUSER);
 console.log(process.env.MYSQLHOST);
 console.log(process.env.MYSQLPASSWORD);
 console.log(process.env.MYSQLPORT);
+const API_key= process.env.FASTSMSAPI_APIKEY;
+console.log(API_key);
 const PORT=process.env.PORT;
 
 let dateObject = new Date();
