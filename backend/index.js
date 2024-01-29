@@ -27,6 +27,27 @@ const API_key= process.env.FASTSMSAPI_APIKEY;
 console.log(API_key);
 const PORT=process.env.PORT;
 
+
+database.connect((err)=>
+{
+    if(!err)
+    {
+        console.log("Database is connected");
+    }
+    else 
+    {
+        console.log(err);
+    }
+})
+
+database.ping((err) => {
+    if (err) {
+      console.log('Connection is not alive');
+    } else {
+      console.log('Connection is alive');
+    }
+  });
+
 let dateObject = new Date();
 let OTP="",DeliveryTime,courierid,ReceivedTime;
 let ReceiverOTP="";
