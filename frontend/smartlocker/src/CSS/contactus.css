@@ -1,0 +1,130 @@
+:root{
+    --offWhite:#edf0ee;
+    --gray:#606462;
+    --midGray:#d5d8d6;
+    --darkGreen:#00493a;
+    --liteGreen:#00735c;
+    --darkRed:#7a0000;
+    --liteRed:#ec0202;
+}
+body{
+    background-color: var(--offWhite);
+    font-family: 'Roboto';
+    margin-left: 50px;
+    margin-top: 30px;
+    margin-right: 50px;
+}
+.contactwrapper{
+    display: grid;
+    grid-template-rows: 0.1fr 2fr;
+    gap: 0px;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Roboto Mono';
+    font-size: 16px;
+    align-items: center;
+}
+.Logo{
+    font-family: 'Bangers';
+    font-size: 36px;
+    color: var(--darkGreen);
+}
+.rightHead .Link{
+    text-decoration: none;
+    color: var(--gray);
+}
+.rightHead .Link:hover{
+    border-bottom: 2px solid var(--gray);
+}
+.Contactuscontent{
+    display: flex;
+    margin-top: 20px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.Contactuscontent img{
+    height: 500px;
+    width: 380px;
+    border-radius: 15px;
+}
+.Contactustitle{
+    text-align: center;
+    font-size: 64px;
+    font-family: 'Bangers';
+    color: var(--gray);
+    font-weight: 500;
+}
+.ContactuscontactWrap{
+    background-color: var(--midGray);
+    border-radius: 15px;
+    width: 600px;
+    text-align: center;
+}
+.ContactuscontactForm{
+    display: grid;
+    grid-template-rows: 60px 60px 120px 50px;
+    margin-top: 30px;
+}
+.ContactusinputBox{
+    position: relative;
+}
+.ContactusinputBox input{
+    width: 450px;
+    height: 40px;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+    background-color: var(--offWhite);
+    padding-left: 60px;
+    color: var(--gray);
+    font-size: 16px;
+}
+.ContactusinputBox2 input{
+    height: 80px;
+    overflow-wrap: break-word;
+}
+.ContactusinputBox input ::placeholder{
+    font-family: 'Roboto';
+    color: var(--gray);
+    font-size: 16px;
+}
+.ContactusinputBox input:focus{
+    font-weight: 600;
+    font-family: 'Roboto';
+}
+.ContactusinputBox i{
+    position: absolute;
+    left: 0;
+    transform: translate(460%, 80%);
+    color: var(--gray);
+}
+.ContactusinputBox textarea{
+    height: 70px;
+}
+#Contactusmessage{
+    width: 450px;
+    outline: none;
+    border: none;
+    background-color: var(--offWhite);
+    border-radius: 15px;
+    padding-left: 60px;
+    padding-top: 10px;
+}
+.Contactussubmit{
+    width: 100px;
+    height: 30px;
+    font-family: 'Roboto';
+    border: none;
+    color: var(--offWhite);
+    background-color: var(--liteGreen);
+    border-radius: 50px;
+    margin-left: 450px;
+    font-size: 16px;
+}
+.submit:hover{
+    cursor: pointer;
+    background-color: var(--darkGreen);
+}

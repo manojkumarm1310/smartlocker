@@ -1,0 +1,117 @@
+:root{
+    --offWhite:#edf0ee;
+    --gray:#606462;
+    --midGray:#d5d8d6;
+    --darkGreen:#00493a;
+    --liteGreen:#00735c;
+    --darkRed:#7a0000;
+    --liteRed:#ec0202;
+}
+body{
+    background-color: var(--offWhite);
+    font-family: 'Roboto';
+    margin-left: 100px;
+    margin-top: 30px;
+    margin-right: 100px;
+}
+.wrapper{
+    display: grid;
+    grid-template-rows: 0.1fr 2fr;
+    gap: 90px;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Roboto Mono';
+    font-size: 16px;
+    align-items: center;
+}
+.Logo{
+    font-family: 'Bangers';
+    font-size: 36px;
+    color: var(--darkGreen);
+}
+.rightHead a{
+    text-decoration: none;
+    color: var(--gray);
+}
+.rightHead .Link:hover{
+    border-bottom: 2px solid var(--gray);
+}
+.Selectorcontent{
+    display: grid;
+    justify-items: center;
+}
+.selloginWrap{
+    background-color: var(--midGray);
+    width: 300px;
+    height: 400px;
+    display: grid;
+    /* align-items: center; */
+    text-align: center;
+    border-radius: 50px;
+    grid-template-rows: 139px 100px 10px;
+}
+.selloginWrap div:nth-child(1){
+    color: var(--gray);
+    font-size: 16px;
+    font-weight: 600;
+    padding-top: 70px;
+}
+.dp{
+    background-color: var(--liteGreen);
+    width: 170px;
+    height: 45px;
+    margin-left: 65px;
+    border-radius: 50px;
+    margin-top: 30px;
+}
+.dp .Link{
+    color: var(--offWhite);
+    font-size: 16px;
+    text-decoration: none;
+    display: grid;
+    grid-template-rows: 20px;
+    padding-top: 12px;
+}
+.dp .Link:hover{
+    font-weight: 600;
+}
+.selloginWrap div:nth-child(3){
+    color: var(--gray);
+    font-size: 16px;
+}
+.recp{
+    background-color: var(--darkGreen);
+    width: 170px;
+    margin-left: 65px;
+    height: 45px;
+    border-radius: 50px;
+}
+.recp .Link{
+    color: var(--offWhite);
+    font-size: 16px;
+    text-decoration: none;
+    display: grid;
+    grid-template-rows: 20px;
+    padding-top: 12px;
+}
+.recp .Link:hover{
+    font-weight: 600;
+}
+.footer{
+    background-color: var(--gray);
+    width: 70px;
+    height: 30px;
+    border-radius: 50px;
+}
+.footer .Link{
+    text-decoration: none;
+    color: var(--offWhite);
+ 
+    display: grid;
+   
+}
+.footer .Link:hover{
+    font-weight: 600;
+}

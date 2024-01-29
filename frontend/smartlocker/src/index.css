@@ -1,0 +1,289 @@
+body
+{
+  margin: 0;
+}
+
+.TitleouterLayer
+{
+  margin: 300px auto;
+  text-align: center;
+  font-family: 'Concert One', sans-serif;
+}
+.TitleouterLayer h1
+{
+  color: rgb(87, 249, 195);
+  font-size: 48px;
+}
+.TitleouterLayer span{
+  color: rgb(196, 111, 71);
+}
+.outerLayer
+{
+  margin: 200px auto;
+  max-width: 600px;
+  background-color: rgb(166, 247, 220);
+  display: flex;
+  justify-content: center;
+  height: 300px;
+  width: auto;
+  border-radius: 30px;
+}
+.outerLayer .container
+{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+}
+.Selector .container .Link
+{
+  width: 120px;
+  background-color: aliceblue;
+  padding: 10px 15px;
+  margin: 20px 0;
+  border-radius: 30px;
+  text-decoration: none;
+  color: sienna;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size:x-large;
+}
+
+.inputOuterLayer
+{
+  margin: 120px auto;
+  max-width: 500px;
+  padding: 40px 60px;
+  background-color: rgb(166, 247, 220);
+  display: flex;
+  justify-content: center;
+  padding: 30px 80px;
+  border-radius: 30px;
+}
+.form
+{
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  gap:10px
+}
+.input
+{
+  color: sienna;
+  display: flex;
+  flex-direction: column;
+  gap:15px;
+  background-color: aliceblue;
+  padding: 20px 20px;
+  border-radius: 30px;
+  margin: 20px 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size:x-large;
+}
+.courierDetail .input input{
+  border: none;
+  border-bottom: solid sienna 2px;
+  padding: 15px;
+  background-color: azure;
+  border-radius: 10px;
+}
+.button-45 {
+  width: max-content;
+  place-self: end;
+  align-items: center;
+  color: sienna;
+  background-color: azure;
+  border: 1px solid #FEE0E0;
+  border-radius: 15px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: flex;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 10px 24px;
+  text-decoration: none;
+  text-shadow: none;
+  text-underline-offset: 1px;
+  transition: border .2s ease-in-out,box-shadow .2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  word-break: break-word;
+}
+
+.button-45:active,
+.button-45:hover,
+.button-45:focus {
+  outline: 0;
+}
+
+
+.button-45:active {
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
+  color: #FFFFFF;
+}
+
+.button-45:hover {
+  background-color: #FFE3E3;
+  border-color: sienna;
+}
+
+.button-45:active:hover,
+.button-45:focus:hover,
+.button-45:focus {
+  box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px 0 inset;
+  color: black;
+}
+.otp{
+  height: max-content;
+}
+.otp .container .input
+{
+  padding: 40px 30px;
+  width: 400px;
+  display: flex;
+  gap:20px;
+}
+.otp .container .input input
+{
+  border: none;
+  border-bottom: solid sienna 2px;
+  padding: 15px;
+  background-color: azure;
+  border-radius: 10px;
+}
+.otp p button{
+  border: none;
+  background: none;
+  text-decoration: underline; 
+  color: rgb(239, 93, 39);
+}
+.otp button
+{
+  margin-bottom: 20px;
+}
+
+.LockerSelection
+{
+  max-width: 700px;
+  background-color: aquamarine;
+  margin: 80px auto 0 auto;
+  border-radius: 30px;
+  padding: 40px 50px 20px 50px;
+  display: flex;
+  flex-direction: column;
+ 
+}
+.box
+{
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.LockerContainer
+{
+  background-color: azure;
+  border-radius: 20px;
+  padding: 30px 30px;
+  margin-bottom: 20px; 
+}
+.boxes
+{
+  background-color: azure;
+  border-radius: 20px;
+  padding: 20px 5px 0px 5px;
+  margin-bottom: 5px; 
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit,minmax(70px,1fr));
+  grid-template-rows: repeat(4,70px);
+}
+.small, .medium, .large
+{
+  background-color: rgb(79, 251, 31);
+
+}
+
+.s3
+{
+  grid-area: 2 / 1 / 2 / 1 ;
+}
+.s4
+{
+  grid-area: 2 / 2 / 2 / 3;
+}
+.m1
+{
+  grid-area: 1 / 3 / 3 / 4 ;
+}
+.m2
+{
+  grid-area:  1/ 4 / 3 / 5;
+}
+.l1
+{
+  grid-area: 3 / 1 / 5 / 3;
+}
+.l2
+{
+  grid-area: 3 / 3 / 5 / 5;
+}
+.LockerSelection .buttonSeparate
+{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.customerDetail .input input
+{
+  border: none;
+  border-bottom: solid sienna 2px;
+  padding: 15px;
+  background-color: azure;
+  border-radius: 10px;
+}
+.customerDetails 
+{
+  height: fit-content;
+  padding: 20px;
+  margin: 80px auto 0 auto;
+}
+.selectedDoor
+{
+  background-color: rgb(255, 136, 0);
+}
+.unavailableDoor
+{
+  background-color: rgb(255, 0, 0);
+}
+.LockerContainer h3 {
+  margin:0;
+  color:sienna;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size:x-large;
+}
+.lockedDoor
+{
+  background-color: aqua;
+}
+.buttonSeparate
+{
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.customerDetails{
+  color:sienna;
+  font-family: 'Bebas Neue', sans-serif;
+}
+.handleButton
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: normal;
+}
