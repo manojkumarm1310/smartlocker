@@ -123,19 +123,19 @@ app.post("/deliveryman",async (req,res)=>
         //  message:message,
             numbers:deliveryman_contact
         }
-        // axios.post("https://www.fast2sms.com/dev/bulkV2",options,{
-        //     headers:{
-        //         Authorization:API_key
-        //     }
-        // }).then((response)=>
-        // {
-        //     console.log("SMS response from delivery API: ",response.data.message);
-        //     dbData.sms=response.data.message;
-        // }).catch((err)=>
-        // {
-        //     console.log("SMS err: ",err);
-        //     return res.status(500).json({Errors:err});
-        // })
+        axios.post("https://www.fast2sms.com/dev/bulkV2",options,{
+            headers:{
+                Authorization:API_key
+            }
+        }).then((response)=>
+        {
+            console.log("SMS response from delivery API: ",response.data.message);
+            dbData.sms=response.data.message;
+        }).catch((err)=>
+        {
+            console.log("SMS err: ",err);
+            return res.status(500).json({Errors:err});
+        })
         return res.status(200).json({dbData});
 
     }
@@ -230,19 +230,19 @@ app.post("/customerDetails",async (req,res)=>
             //message:message,
             numbers:Recipient_contact
         }
-        // await axios.post("https://www.fast2sms.com/dev/bulkV2",options,{
-        //     headers:{
-        //         Authorization:API_key
-        //     }
-        // }).then((response)=>
-        // {
-        //     console.log("Recipient SMS side: ",response.data.message);
-        //     dbData.sms=response.data.message;
-        // }).catch((err)=>
-        // {
-        //     console.log("SMS error from RecipientSMS: ",err);
-        //     return res.status(500).json({Errors:err});
-        // })
+        await axios.post("https://www.fast2sms.com/dev/bulkV2",options,{
+            headers:{
+                Authorization:API_key
+            }
+        }).then((response)=>
+        {
+            console.log("Recipient SMS side: ",response.data.message);
+            dbData.sms=response.data.message;
+        }).catch((err)=>
+        {
+            console.log("SMS error from RecipientSMS: ",err);
+            return res.status(500).json({Errors:err});
+        })
         console.log(dbData);
         return res.status(200).json(dbData);
     }
