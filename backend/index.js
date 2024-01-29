@@ -204,9 +204,9 @@ app.post("/customerDetails",async (req,res)=>
         ReceiverOTP=ReceiverOTP+digits[Math.floor(Math.random()*10)];
     }
     DeliveryTime=dateObject.toLocaleString();
-    const sql="INSERT INTO recipient(`NAMES`,`CONTACT`,`DOORNUMBER`,`RecipientOTP`,`DeliveryTime`,`STATUS`,`SelectedDoor`,`DeliveryPersonName`,`DeliveryPersonContact`) VALUES (?,?,?,?,?,?,?,?,?)";
+    const sql="INSERT INTO recipient(`NAMES`,`CONTACT`,`DOORNUMBER`,`RecipientOTP`,`DeliveryTime`,`STATUS`,`SelectedDoor`,`DeliveryPersonName`,`DeliveryPersonContact`,`ReceivedTime`) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
-    let values=[req.body.customerName,req.body.customerContact,req.body.DoorNumber,ReceiverOTP,DeliveryTime,status,req.body.DoorNumber,currentcourier.name,currentcourier.contact];
+    let values=[req.body.customerName,req.body.customerContact,req.body.DoorNumber,ReceiverOTP,DeliveryTime,status,req.body.DoorNumber,currentcourier.name,currentcourier.contact,""];
     database.query(sql,values,(err,data)=>
     {
         console.log(data);
@@ -230,19 +230,19 @@ app.post("/customerDetails",async (req,res)=>
             //message:message,
             numbers:Recipient_contact
         }
-        await axios.post("https://www.fast2sms.com/dev/bulkV2",options,{
-            headers:{
-                Authorization:API_key
-            }
-        }).then((response)=>
-        {
-            console.log("Recipient SMS side: ",response);
-            dbData.sms=response.data.message;
-        }).catch((err)=>
-        {
-            console.log("SMS error from RecipientSMS: ",err);
-            return res.status(500).json({Errors:err});
-        })
+        // await axios.post("https://www.fast2sms.com/dev/bulkV2",options,{
+        //     headers:{
+        //         Authorization:API_key
+        //     }
+        // }).then((response)=>
+        // {
+        //     console.log("Recipient SMS side: ",response.data.message);
+        //     dbData.sms=response.data.message;
+        // }).catch((err)=>
+        // {
+        //     console.log("SMS error from RecipientSMS: ",err);
+        //     return res.status(500).json({Errors:err});
+        // })
         console.log(dbData);
         return res.status(200).json(dbData);
     }
