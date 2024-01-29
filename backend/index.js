@@ -93,6 +93,7 @@ app.post("/deliveryman",async (req,res)=>
             console.log(data);
             if(err)
             {
+                console.log(err);
                 return res.status(500).json({ error: "Error inserting into database" });
             }
             dbData.delivery = data;
@@ -103,6 +104,7 @@ app.post("/deliveryman",async (req,res)=>
         database.query(getid,[req.body.name,req.body.contact,OTP],(err,data)=>
         {
             if(err) {
+                console.log(err);
                 return res.json("Error");
                 } else {
                 var values=JSON.parse(JSON.stringify(data));
@@ -177,6 +179,7 @@ app.post("/LockerSelection",(req,res)=>
             console.log(data);
             if(err)
             {
+                console.log(err);
                 return res.status(500).json({ error: "Error updating into database" });
             }
             return res.status(200).json({Response:data})
@@ -184,6 +187,7 @@ app.post("/LockerSelection",(req,res)=>
     }
     catch(err)
     {
+        console.log(err);
             return res.status(500).json(err)
     }
     
