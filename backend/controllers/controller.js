@@ -83,7 +83,7 @@ export async function delivermanOTP(req,res){
     try {
         const getOTP = req.body.input;
         if (OTP !== getOTP) {
-          return res.status(500).json('Incorrect');
+          return res.status(200).json('Incorrect');
         }
         return res.status(200).json('correct');
       } catch (err) {
