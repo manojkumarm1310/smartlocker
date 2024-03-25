@@ -60,7 +60,7 @@ export async function createDeliveryman(req,res)
           numbers: deliveryman_contact
         }
     
-        axios.post("https://www.fast2sms.com/dev/bulkV2", options, {
+        await axios.post("https://www.fast2sms.com/dev/bulkV2", options, {
           headers: {
             Authorization: API_key
           }
