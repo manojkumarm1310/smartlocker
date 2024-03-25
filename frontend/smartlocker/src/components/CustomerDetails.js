@@ -20,7 +20,7 @@ export default function CustomerDetails()
     
     useEffect(()=>
     {
-        axios.get("http://localhost:8081/customerDetails").then((data)=>
+        axios.get("https://smartlocker-vercel-app.vercel.app/customerDetails").then((data)=>
         {   
 
             let selectedDoor=data.data[0].selectedDoor;
@@ -49,7 +49,7 @@ export default function CustomerDetails()
         setErrorValidation(ErrorValidation);
         if(ErrorValidation.name==="" && ErrorValidation.contact==="")
         {
-            await axios.post("http://localhost:8081/customerDetails", recipient).then((data)=>
+            await axios.post("https://smartlocker-vercel-app.vercel.app/customerDetails", recipient).then((data)=>
             {
                 Navigate("/")
             }).catch((err)=>
@@ -61,7 +61,7 @@ export default function CustomerDetails()
     }
     async function handleCancel()
     {
-            await axios.delete("http://localhost:8081/customerDetails").then((data)=>
+            await axios.delete("https://smartlocker-vercel-app.vercel.app/customerDetails").then((data)=>
             {
                 Navigate("/");
             }).catch((err)=>

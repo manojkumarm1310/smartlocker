@@ -16,7 +16,7 @@ export default function LockerSelection()
     {
        if(bool)
        {
-         axios.get("http://localhost:8081/LockerSelection").then((fetchdata)=>
+         axios.get("https://smartlocker-vercel-app.vercel.app/LockerSelection").then((fetchdata)=>
         {
           
             for(let i=0;i<fetchdata.data.length;i++)
@@ -63,7 +63,7 @@ export default function LockerSelection()
         {
             if(window.confirm("Remember! Have you closed the Locker Door?"))
             {  
-                await axios.post("http://localhost:8081/LockerSelection",{currentSelectedDoor}).then((res)=>
+                await axios.post("https://smartlocker-vercel-app.vercel.app/LockerSelection",{currentSelectedDoor}).then((res)=>
                 {   
                     Navigate("/customerDetails");
                 }).catch((err)=>
@@ -84,7 +84,7 @@ export default function LockerSelection()
         event.preventDefault();
         if(window.confirm("Don't you deliver anything?"))
         {
-                await axios.delete("http://localhost:8081/LockerSelection").then((data)=>
+                await axios.delete("https://smartlocker-vercel-app.vercel.app/LockerSelection").then((data)=>
                 {
                     console.log(data);
                     Navigate("/");

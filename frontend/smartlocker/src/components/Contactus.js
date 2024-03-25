@@ -22,7 +22,7 @@ export default function Contactus()
     async function handleSubmit(event)
     {
         event.preventDefault();
-        await axios.post("http://localhost:8081/help",query).then((res)=>
+        await axios.post("https://smartlocker-vercel-app.vercel.app/help",query).then((res)=>
         {
             navigate("/");
         }).catch((err)=>

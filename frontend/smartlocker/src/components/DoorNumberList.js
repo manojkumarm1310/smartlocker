@@ -12,7 +12,7 @@ export default function DoorNumberList()
     {
         async function axiosGet()
         {
-            await axios.get("http://localhost:8081/Doornumberlist").then((res)=>
+            await axios.get("https://smartlocker-vercel-app.vercel.app/Doornumberlist").then((res)=>
                 {
      
                     setlist(res.data);
@@ -43,7 +43,7 @@ export default function DoorNumberList()
    async function handleSubmit(event)
     {
         event.preventDefault();
-        await axios.post("http://localhost:8081/Doornumberlist",{selectedDoor}).then((res)=>{
+        await axios.post("https://smartlocker-vercel-app.vercel.app/Doornumberlist",{selectedDoor}).then((res)=>{
             Navigate("/recipientOTP")
         }).catch((err)=>{
             console.log(err);

@@ -26,7 +26,7 @@ export default function Otp()
 
         if(ErrorValidation.otp==="")
         {
-          await axios.post("http://localhost:8081/otp",{input}).then((res)=>
+          await axios.post("https://smartlocker-vercel-app.vercel.app/otp",{input}).then((res)=>
             {
                 Navigate("/LockerSelection")
             }).catch((res)=>
@@ -38,7 +38,7 @@ export default function Otp()
     
  async function handleCancel()
     {
-            await axios.delete("http://localhost:8081/otp").then((data)=>
+            await axios.delete("https://smartlocker-vercel-app.vercel.app/otp").then((data)=>
             {
                 Navigate("/Selector");
             }).catch((err)=>

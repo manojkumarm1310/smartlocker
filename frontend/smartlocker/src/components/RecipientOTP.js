@@ -44,7 +44,7 @@ export default function RecipientOTP()
             //     // window.alert(err);
             // })
 
-            await axios.post("http://localhost:8081/recipientOTP",{input}).then((res)=>
+            await axios.post("https://smartlocker-vercel-app.vercel.app/recipientOTP",{input}).then((res)=>
             {
                 
                 if(res.data.status=="succuss")

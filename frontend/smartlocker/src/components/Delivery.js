@@ -25,7 +25,7 @@ export default function Delivery()
         setErrorValidation(ErrorValidation);
         if(ErrorValidation.name==="" && ErrorValidation.contact==="" )
         {   
-            await axios.post("http://localhost:8081/deliveryman", Deliveryperson).then(res=>
+            await axios.post("https://smartlocker-vercel-app.vercel.app/deliveryman", Deliveryperson).then(res=>
             {
                     Navigate("/otp");
             }).catch(err=>
