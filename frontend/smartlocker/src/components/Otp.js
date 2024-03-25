@@ -29,8 +29,8 @@ export default function Otp()
           await axios.post("https://smartlocker-vercel-app.vercel.app/otp",{input}).then((res)=>
             {
                 console.log(res);
-                setIsCorrectOTP(res.response.data)
-                if(res.response.data=="correct")
+                setIsCorrectOTP(res.data)
+                if(res.data=="correct")
                 {
                 Navigate("/LockerSelection")
         }}).catch((err)=>
