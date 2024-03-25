@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function Otp()
 {
     const [input,setInput]=useState("")
-    const [DeliveryManOTP,setDeliveryManOTP]=useState("");
+
     const [iscorrectOTP,setIsCorrectOTP]=useState("");
     const Navigate=useNavigate();
     function handleinput(event)
@@ -19,14 +19,14 @@ export default function Otp()
     async function handleSubmit(event)
     {
         event.preventDefault();
-        setDeliveryManOTP(input);
+
        
         let ErrorValidation=checkOTP(input);
         setErrorValidation(ErrorValidation);
 
         if(ErrorValidation.otp==="")
         {
-          await axios.post("https://smartlocker-production.up.railway.app/otp",{input}).then((res)=>
+          await axios.post("http://localhost:8081/otp",{input}).then((res)=>
             {
                 Navigate("/LockerSelection")
             }).catch((res)=>
@@ -38,7 +38,7 @@ export default function Otp()
     
  async function handleCancel()
     {
-            await axios.delete("https://smartlocker-production.up.railway.app/otp").then((data)=>
+            await axios.delete("http://localhost:8081/otp").then((data)=>
             {
                 Navigate("/Selector");
             }).catch((err)=>

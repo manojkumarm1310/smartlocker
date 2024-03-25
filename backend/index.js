@@ -16,13 +16,21 @@ app.use(express.json());
 
 
 
-const urlmysql=`mysql://${process.env.MYSQLUSER}:${process.env.MYSQLPASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQLDATABASE}`;
-const database = mysql.createConnection(urlmysql);
-console.log(process.env.MYSQLDATABASE);
-console.log(process.env.MYSQLUSER);
-console.log(process.env.MYSQLHOST);
-console.log(process.env.MYSQLPASSWORD);
-console.log(process.env.MYSQLPORT);
+// const urlmysql=`mysql://${process.env.MYSQLUSER}:${process.env.MYSQLPASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLPORT}/${process.env.MYSQLDATABASE}`;
+// const database = mysql.createConnection(urlmysql);
+// console.log(process.env.MYSQLDATABASE);
+// console.log(process.env.MYSQLUSER);
+// console.log(process.env.MYSQLHOST);
+// console.log(process.env.MYSQLPASSWORD);
+// console.log(process.env.MYSQLPORT);
+
+const database=mysql.createConnection({
+    host:"localhost",
+    user:"root",
+    password:"",
+    database:"smartlocker"
+})
+
 const API_key= process.env.FASTSMSAPI_APIKEY;
 console.log(API_key);
 const PORT=process.env.PORT;
@@ -71,7 +79,8 @@ let selectedDoorNumber=[];
 app.post("/deliveryman",async (req,res)=>
 {
     try
-    {   OTP="";
+    {   
+        OTP="";
         
         for(var i=0;i<4;i++)
         {

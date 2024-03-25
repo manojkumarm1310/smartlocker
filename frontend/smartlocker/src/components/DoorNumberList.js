@@ -6,14 +6,20 @@ import axios from "axios";
 export default function DoorNumberList()
 {
     const Navigate=useNavigate();
+    const [lockerlist,setlockerList]=useState(true);
     const [list,setlist]=useState([]);
     useEffect(()=>
     {
         async function axiosGet()
         {
-            await axios.get("https://smartlocker-production.up.railway.app/Doornumberlist").then((res)=>
+            await axios.get("http://localhost:8081/Doornumberlist").then((res)=>
                 {
-                    setlist(res.data)
+     
+                    setlist(res.data);
+                    if(res.data.length==1 && res.data[0].DOORNUMBER==0)
+                    {
+                        setlockerList(false);
+                    }
                 }
             ).catch((err)=>{
                 console.log(err);
@@ -33,11 +39,11 @@ export default function DoorNumberList()
         let DoornumInt=parseInt(event.target.id);
         setSelectedDoor(DoornumInt);
     }
-    console.log(list);
+
    async function handleSubmit(event)
     {
         event.preventDefault();
-        await axios.post("https://smartlocker-production.up.railway.app/Doornumberlist",{selectedDoor}).then((res)=>{
+        await axios.post("http://localhost:8081/Doornumberlist",{selectedDoor}).then((res)=>{
             Navigate("/recipientOTP")
         }).catch((err)=>{
             console.log(err);
@@ -56,6 +62,7 @@ export default function DoorNumberList()
             <form action="" class="formlist" onSubmit={handleSubmit} >
                 <div className="listtitle">Locker List</div>
                 <div className="lists">
+                {lockerlist ? <p></p>:<p>No Locker is allocated for you</p>}
                       {
                         list.map((doornumber)=>{
                             if(doornumber.DOORNUMBER!=0)
