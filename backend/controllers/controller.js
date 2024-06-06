@@ -49,14 +49,14 @@ export async function createDeliveryman(req,res)
         });
     
         courierid = result.insertedId;
-    
+        let message=`Hello ${req.body.name},Your OTP is ${OTP}`
         const deliveryman_contact = req.body.contact;
         const options = {
-          route: "otp",
+          route: "q",
           variables_values: OTP,
           flash: 0,
           language: "english",
-        // message:message,
+          message:message,
           numbers: deliveryman_contact
         }
     
@@ -65,6 +65,7 @@ export async function createDeliveryman(req,res)
             Authorization: API_key
           }
         }).then((response) => {
+            console.log(response)
           console.log("SMS response from delivery API: ", response.data.message);
         }).catch((err) => {
           console.log("SMS err: ", err);
@@ -143,13 +144,16 @@ export async function customerDetails(req,res)
         };
 
         await collection.insertOne(document);
+        
+        let message=`Hello ${req.body.customerName},Your OTP is ${ReceiverOTP},Your Locker number is ${req.body.DoorNumber}.Delivery person contact Detail: Name: ${currentcourier.name},Contact Number:${currentcourier.contact}`
 
         const Recipient_contact = req.body.customerContact;
         const options = {
-            route: "otp",
+            route: "q",
             variables_values: ReceiverOTP,
             language: "english",
             flash: 0,
+            message:message,
             numbers: Recipient_contact
         };
 
