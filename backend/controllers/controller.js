@@ -274,8 +274,8 @@ export async function help(req,res){
             port: 465,
             secure:true,
             auth: {
-              user: process.env.EMAIL,
-              pass: process.env.MAIL_PW
+              user: process.env.EMAIL || "manojkumar20011013@gmail.com",
+              pass: process.env.MAIL_PW || "rirk eebu hfax zlbs"
             }
           });
 
@@ -283,17 +283,17 @@ export async function help(req,res){
         if(response)
         {
             const mailOptions = {
-                from: process.env.EMAIL,
-                to: process.env.EMAIL,
+                from: process.env.EMAIL || "manojkumar20011013@gmail.com",
+                to: process.env.EMAIL || "manojkumar20011013@gmail.com",
                 subject: 'Response',
                 html:"Response from server",
                 text: `This message was sent by ${document.NAMES} and their contact is ${document.CONTACT}.The message is ${document.MESSAGES}`,
             };
-            transporter.sendMail(mailOptions,(err,info)=>{if(err){
+            const mailResponse=await transporter.sendMail(mailOptions);
+            if(!mailResponse){
                 console.log("/help Mail Error: ", err);
                 return res.status(500).json({err,errorMessage:"Something went wrong while sending a E-Mail!"});        
             }
-        })
             return res.status(200).json("Sent");
         }
         else
