@@ -271,7 +271,7 @@ export async function help(req,res){
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             host:"smtp.gmail.com",
-            port:"465",
+            port: 465,
             secure:true,
             auth: {
               user: process.env.EMAIL,
@@ -286,13 +286,14 @@ export async function help(req,res){
                 from: process.env.EMAIL,
                 to: process.env.EMAIL,
                 subject: 'Response',
+                html:"Response from server",
                 text: `This message was sent by ${document.NAMES} and their contact is ${document.CONTACT}.The message is ${document.MESSAGES}`,
             };
-            const mailResponse=await transporter.sendMail(mailOptions);
-            if(!mailResponse){
-                console.log("/help Error: ", err);
+            transporter.sendMail(mailOptions,(err,info)=>{if(err){
+                console.log("/help Mail Error: ", err);
                 return res.status(500).json({err,errorMessage:"Something went wrong while sending a E-Mail!"});        
             }
+        })
             return res.status(200).json("Sent");
         }
         else
