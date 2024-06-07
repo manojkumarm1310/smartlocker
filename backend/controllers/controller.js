@@ -1,6 +1,7 @@
 import { getDatabase } from '../models/database.js';
 import { generateOTP } from '../helper/helper.js'; 
 import axios from "axios";
+import nodemailer from "nodemailer";
 const API_key = process.env.FASTSMSAPI_APIKEY;
 
 let dateObject = new Date();
@@ -60,23 +61,24 @@ export async function createDeliveryman(req,res)
           numbers: deliveryman_contact
         }
     
-        await axios.post("https://www.fast2sms.com/dev/bulkV2", options, {
+        const response=await axios.post("https://www.fast2sms.com/dev/bulkV2", options, {
           headers: {
             Authorization: API_key
           }
-        }).then((response) => {
-            console.log(response)
-          console.log("SMS response from delivery API: ", response.data.message);
-        }).catch((err) => {
-          console.log("SMS err: ", err);
-          return res.status(500).json({ Errors: err });
-        });
+        })
+        // .then((response) => {
+        //     console.log(response)
+        //   console.log("SMS response from delivery API: ", response.data.message);
+        // }).catch((err) => {
+        //   console.log("SMS err: ", err);
+        //   return res.status(500).json({ Errors: err });
+        // });
     
         return res.status(200).json({ dbData: { delivery: result, sms: "SMS sent successfully" } });
     
       } catch (err) {
         console.log("/deliverman Error:", err);
-        return res.status(500).json({ errors: err.message });
+        return res.status(500).json({ errors: err.message,errorMessage:"Something went wrong!" });
       }
     }
 
@@ -89,7 +91,7 @@ export async function delivermanOTP(req,res){
         return res.status(200).json('correct');
       } catch (err) {
         console.log('/otp Error:', err);
-        return res.json.status(500).json({ OTPerror: err.message });
+        return res.json.status(500).json({ OTPerror: err.message,errorMessage:"Something went wrong,OTP Failed!" });
       }
 }
 
@@ -106,13 +108,13 @@ export async function LockerSelection(req,res){
           { $set: { selectedDoor: doornumber } });
         if(!response)
         {
-              return res.status(500).json("Data is not updated")
+              return res.status(500).json({error:"Data is not updated",errorMessage:"Something went wrong!"})
         }
         return res.status(200).json({ Response: response.acknowledged });
   
       } catch (err) {
         console.log(err);
-        return res.status(500).json(err);
+        return res.status(500).json({err,errorMessage:"Something went wrong,Try again!"});
       }
 }
 
@@ -157,22 +159,23 @@ export async function customerDetails(req,res)
             numbers: Recipient_contact
         };
 
-        await axios.post("https://www.fast2sms.com/dev/bulkV2", options, {
+        const response=await axios.post("https://www.fast2sms.com/dev/bulkV2", options, {
             headers: {
                 Authorization: API_key
             }
-        }).then((response) => {
-            console.log("Recipient SMS side: ", response.data.message);
-            dbData.sms = response.data.message;
-        }).catch((err) => {
-            console.log("SMS error from RecipientSMS: ", err);
-            return res.status(500).json({ Errors: err });
-        });
+        })
+        // .then((response) => {
+        //     console.log("Recipient SMS side: ", response.data.message);
+        //     dbData.sms = response.data.message;
+        // }).catch((err) => {
+        //     console.log("SMS error from RecipientSMS: ", err);
+        //     return res.status(500).json({ Errors: err });
+        // });
 
         return res.status(200).json(dbData);
     } catch (err) {
         console.log("/CustomerDetail Error:", err);
-        return res.status(500).json(err);
+        return res.status(500).json({err,errorMessage:"Something went wrong!"});
     }
 }
 
@@ -197,7 +200,7 @@ export async function recipient(req,res){
             }
     } catch (err) {
         console.log("/recipient Error :", err);
-        return res.status(500).json(err);
+        return res.status(500).json({err,errorMessage:"Something went wrong!"});
     }
 }
 
@@ -241,7 +244,7 @@ export async function recipientOTP(req,res){
         await collection.updateOne(filter, update, (err, data) => {
             if (err) {
                 console.log(err);
-                return res.status(500).json("Error at OTP server");
+                return res.status(500).json({error:"Error at OTP server",errorMessage:"Something went wrong!"});
             }
 
         });
@@ -252,7 +255,7 @@ export async function recipientOTP(req,res){
         }
     } catch (err) {
         console.log("/recipient/otp: ", err);
-        return res.status(500).json(err);
+        return res.status(500).json({err,errorMessage:"Something went wrong !"});
     }
 }
 
@@ -265,19 +268,39 @@ export async function help(req,res){
             CONTACT: req.body.contact,
             MESSAGES: req.body.messages
         };
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            secure:true,
+            auth: {
+              user: process.env.EMAIL,
+              pass: process.env.MAIL_PW
+            }
+          });
 
         const response=await collection.insertOne(document);
         if(response)
         {
+            const mailOptions = {
+                from: process.env.EMAIL,
+                to: process.env.EMAIL,
+                subject: 'Response',
+                text: `This message was sent by ${document.NAMES} and their contact is ${document.CONTACT}.The message is ${document.MESSAGES}`,
+            };
+            const mailResponse=await transporter.sendMail(mailOptions);
+            if(!mailResponse){
+                console.log("/help Error: ", err);
+                return res.status(500).json({err,errorMessage:"Something went wrong while sending a E-Mail!"});        
+            }
             return res.status(200).json("Sent");
         }
         else
         {
-            console.log("Error")
+            console.log("Error");
         }
+
     } catch (err) {
         console.log("/help Error: ", err);
-        return res.status(500).json(err);
+        return res.status(500).json({err,errorMessage:"Something went wrong while sending a E-Mail!"});
     }
 }
 
@@ -295,7 +318,7 @@ export async function GetRecipientOTP(req,res){
         return res.status(200).send(cursor);
 } catch (err) {
         console.log("/recipientOTP Error: ", err);
-        return res.status(500).json(err);
+        return res.status(500).json({err,errorMessage:"Something went wrong!"});
     }
 }
 
@@ -318,7 +341,7 @@ export async function GetLockerSelection(req,res)
         return res.send(cursor);
     } catch (err) {
         console.log("/LockerSelection Error: ", err);
-        return res.status(500).json(err);
+        return res.status(500).json({err,errorMessage:"Something went wrong!"});
     }
 }
 
@@ -344,7 +367,7 @@ export async function GetCustomerDetail(req,res){
             return res.send(cursor);
     } catch (err) {
         console.log("/customerDetails Error: ", err);
-        return res.status(500).json(err);
+        return res.status(500).json({err,errorMessage:"Something went wrong!"});
     }
 }
 
@@ -361,13 +384,13 @@ export async function GetRecipient(req,res)
 
         await collection.find(query, { projection: { selectedDoor: 1, _id: 0 } }).toArray((err, data) => {
             if (err) {
-                return res.status(500).json(err);
+                return res.status(500).json({err,errorMessage:"Something went wrong!"});
             }
             return res.status(200).send(data);
         });
     } catch (err) {
         console.log("/recipient Error: ", err);
-        return res.status(500).json(err);
+        return res.status(500).json({err,errorMessage:"Something went wrong!"});
     }
 }
 
@@ -397,7 +420,7 @@ export async function GetDoorNumberList(req,res)
         return res.send(cursor);
     } catch (err) {
         console.log("/Doornumberlist Error: ", err);
-        return res.status(500).json(err);
+        return res.status(500).json({err,errorMessage:"Something went wrong!"});
     }
 }
 
@@ -414,13 +437,13 @@ export async function DeleteOTP(req,res)
        const response= await collection.deleteOne(query)
             if(!response)
             {
-                return res.status(500).json({ Error: "Error at delete query" });
+                return res.status(500).json({ errorMessage:"Something went wrong!",Error: "Error at delete query" });
             }
     
             return res.status(200).json(response);
     } catch (err) {
         console.log("/otp Error: ", err);
-        return res.status(500).json(err);
+        return res.status(500).json({err,errorMessage:"Something went wrong!"});
     }
 }
 
@@ -437,13 +460,13 @@ export async function DeleteLockerSelection(req,res)
         const response=await collection.deleteOne(query)
         if(!response)
         {
-            return res.status(500).json({ Error: "Error at delete query" });
+            return res.status(500).json({ Error: "Error at delete query" ,errorMessage:"Something went wrong!"});
         }
         console.log(response);
         return res.status(200).json(response);
     } catch (err) {
         console.log("/LockerSelection Error: ", err);
-        return res.status(500).json(err);
+        return res.status(500).json({err,errorMessage:"Something went wrong!"});
     }
 }
 
@@ -461,12 +484,12 @@ export async function DeleteCustomerDetail(req,res){
 
             if(!response)
             {
-                return res.status(500).json({ Error: "Error at delete query" });
+                return res.status(500).json({ Error: "Error at delete query",errorMessage:"Something went wrong!" });
             }
 
             return res.status(200).json(response);
     } catch (err) {
         console.log("/customerDetails Error: ", err);
-        return res.status(500).json(err);
+        return res.status(500).json({err,errorMessage:"Something went wrong!"});
     }
 }

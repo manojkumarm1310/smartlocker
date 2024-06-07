@@ -6,6 +6,7 @@ import axios from "axios";
 export default function DoorNumberList()
 {
     const Navigate=useNavigate();
+    const [error,setError]=useState("");
     const [lockerlist,setlockerList]=useState(true);
     const [list,setlist]=useState([]);
     useEffect(()=>
@@ -23,6 +24,7 @@ export default function DoorNumberList()
                 }
             ).catch((err)=>{
                 console.log(err);
+                setError(err.response.data.errorMessage)
             })
         }
         axiosGet();
@@ -47,6 +49,7 @@ export default function DoorNumberList()
             Navigate("/recipientOTP")
         }).catch((err)=>{
             console.log(err);
+            setError(err.response.data.errorMessage)
         })
     }
     return(<div class="wrapper">
@@ -62,6 +65,7 @@ export default function DoorNumberList()
             <form action="" class="formlist" onSubmit={handleSubmit} >
                 <div className="listtitle">Locker List</div>
                 <div className="lists">
+                {error?error:""}
                 {lockerlist ? <p></p>:<p>No Locker is allocated for you</p>}
                       {
                         list.map((doornumber)=>{

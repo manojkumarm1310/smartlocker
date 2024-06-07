@@ -8,6 +8,7 @@ import axios from "axios";
 export default function Delivery()
 {
     const Navigate =useNavigate();
+    const [error,setError]=useState("");
     const [Deliveryperson,setDeliveryperson]=useState({
         name:"",
         contact:"",
@@ -31,6 +32,7 @@ export default function Delivery()
             }).catch(err=>
                 {
                     console.log(err);
+                    setError(err.response.data.errorMessage)
                 })
         }}
     function handleCancel()
@@ -52,7 +54,7 @@ export default function Delivery()
         <div class="loginWrap">
             <form action="" class="formLogin" onSubmit={handleSubmit}>
                 <div>Delivery Person</div>
-                <div > {ErrorValidation.name && <span>{ErrorValidation.name} </span> }{ErrorValidation.contact && <span>{ErrorValidation.contact} </span> }</div>
+                <div style={{color:"red"}} >{error?error:""} {ErrorValidation.name && <span>{ErrorValidation.name} </span> }{ErrorValidation.contact && <span>{ErrorValidation.contact} </span> }</div>
                 
                 <div class="inputBox">
                     <input type="text" placeholder="Name" onChange={handleInput} name="name" />

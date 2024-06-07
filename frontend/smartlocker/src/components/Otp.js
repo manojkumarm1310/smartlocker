@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function Otp()
 {
     const [input,setInput]=useState("")
-
+    const [error,setError]=useState("");
     const [iscorrectOTP,setIsCorrectOTP]=useState("");
     const Navigate=useNavigate();
     function handleinput(event)
@@ -35,7 +35,8 @@ export default function Otp()
                 Navigate("/LockerSelection")
         }}).catch((err)=>
                         {
-                            console.log(err)
+                            console.log(err);
+                            setError(err.response.data.errorMessage)
                         })
         }
     }
@@ -48,6 +49,7 @@ export default function Otp()
             }).catch((err)=>
             {
                 console.log(err);
+                setError(err.response.data.errorMessage)
                 // window.alert(err);
             });
             
@@ -69,7 +71,7 @@ export default function Otp()
             <div class="otpWrap">
                 <form action="" class="deliveryformOTP" onSubmit={handleSubmit}>
                     <div>Delivery Person</div>
-                    <div>{ErrorValidation.otp && <span>{ErrorValidation.otp} </span>}{iscorrectOTP=="Incorrect" ? <span>Incorrect OTP</span>:<span></span>}</div>
+                    <div>{error?error:""}{ErrorValidation.otp && <span>{ErrorValidation.otp} </span>}{iscorrectOTP=="Incorrect" ? <span>Incorrect OTP</span>:<span></span>}</div>
                     <div class="inputBox">
                         <input type="text" inputMode="numeric" name="DeliveryManOTP" placeholder="Enter OTP" onChange={handleinput} required/>
                         <i class='bx bxs-paper-plane'></i>

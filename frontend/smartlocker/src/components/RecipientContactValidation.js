@@ -4,7 +4,7 @@ export default function RecipientContactValidation(values)
 {
     const  error= {};
     const nameValidation=/^[A-Za-z\s]+$/;
-    const contactValidation=/^\d{10}$/;
+    const contactValidation=/^(0|91)?[6-9][0-9]{9}$/;
     if(values.customerName==="")
     {
         error.name="Name should be entered";
@@ -16,12 +16,13 @@ export default function RecipientContactValidation(values)
     else{
         error.name="";
     }
+    let contactNumber="91"+values.customerContact;
     if(values.customerContact==="")
     {
         error.contact="Number Should be entered";
     }
-    else if (!contactValidation.test(values.customerContact)) {
-        error.contact="Invalid number; must be ten digits";
+    else if (!contactValidation.test(contactNumber)) {
+        error.contact="Invalid number";
     } else {
         error.contact="";
     }

@@ -9,7 +9,8 @@ export default function LockerSelection()
     const [selectedDoorNumber,setselectedDoorNumber]= useState(0);
     const [currentSelectedDoor,setcurrentSelectedDoor]=useState("");
     const [isDoorSelected,setIsDoorSelected]=useState(false);
-    
+    const [error,setError]=useState("");
+
     const AxiosArray=[];
     let bool=true;
     useEffect(()=>
@@ -30,6 +31,7 @@ export default function LockerSelection()
         }).catch((err)=>
         {
             console.log(err);
+            setError(err.response.data.errorMessage)
         })
 
        }
@@ -69,6 +71,7 @@ export default function LockerSelection()
                 }).catch((err)=>
                 {
                     console.log(err);
+                    setError(err.response.data.errorMessage)
                 //    window.alert(err);
                 })
             }
@@ -91,6 +94,7 @@ export default function LockerSelection()
                 }).catch((err)=>
                 {
                     console.log(err);
+                    setError(err.response.data.errorMessage)
                     // Navigate("/");
                     // window.alert("Server Error");
                 });
@@ -109,7 +113,8 @@ export default function LockerSelection()
             
         </div>
         <div class="Lockercontent">
-            <div class="title">Select Your Locker</div>
+            
+            <div class="title">{ error ? error :"Select Your Locker"}</div>
             <div class="keyWrapper">
                 <div class="key">
                     <div class="available">

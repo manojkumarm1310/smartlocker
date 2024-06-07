@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default function RecipientOTP()
 {
     const [input,setInput]=useState("")
-
+    const [error,setError]=useState("");
     const [IsOTPRight,setIsOTPRight]=useState(true);
     const Navigate=useNavigate();
     function handleinput(event)
@@ -59,6 +59,7 @@ export default function RecipientOTP()
             }).catch((err)=>
             {
                 console.log(err);
+                setError(err.response.data.errorMessage)
                 // Navigate("/");
                 // window.alert("Server Error");
             })
@@ -86,7 +87,7 @@ export default function RecipientOTP()
                 <form action="" class="formOTP" onSubmit={handleSubmit}>
                     <div className="otptitleRD">Recipient Details</div>
                     <div class="inputBox">
-                    <div>{IsOTPRight ? <span></span>:<span>Wrong OTP! Kindly recheck your message!</span>}</div>
+                    <div>{error ? error :""}{IsOTPRight ? <span></span>:<span>Wrong OTP! Kindly recheck your message!</span>}</div>
                         <input type="text" required maxLength={4} minLength={4} inputMode="numeric" name="RecipientOTP" onChange={handleinput} placeholder="OTP"/>
                         <i class='bx bxs-paper-plane'></i>
                         <div>{ErrorValidation.otp && <span>{ErrorValidation.otp} </span> }</div>

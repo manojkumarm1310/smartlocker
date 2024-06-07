@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 export default  function Recipient()
 {
     const [ErrorNotify,setErrorNotify]=useState(true);
+    const [error,setError]=useState("");
     const Navigate=useNavigate();
     const [recipient,setrecipient]=useState({
         customerName:"",
@@ -46,6 +47,7 @@ export default  function Recipient()
             }).catch((err)=>
             {
                 console.log(err);
+                setError(err.response.data.errorMessage)
             
             })
         }
@@ -73,7 +75,7 @@ export default  function Recipient()
             <form action="" class="recipientForm" onSubmit={handleSubmit}>
             
                 <div>Recipient Details</div>
-                <div>{ErrorNotify ? <span></span> : <span>There is no parcel</span>}{ErrorValidation.name && <span>{ErrorValidation.name}</span>}
+                <div>{error?error:""}{ErrorNotify ? <span></span> : <span>There is no parcel</span>}{ErrorValidation.name && <span>{ErrorValidation.name}</span>}
                 {ErrorValidation.contact && <span>{ErrorValidation.contact}</span>}</div>
                 {/* {ErrorValidation.DoorNumber && <span>{ErrorValidation.DoorNumber}</span>} */}
                 <div class="inputBox">

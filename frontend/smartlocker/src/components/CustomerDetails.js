@@ -9,6 +9,7 @@ export default function CustomerDetails()
 
 
     const Navigate=useNavigate();
+    const [error,setError]=useState("");
     const [recipient,setrecipient]=useState({
         customerName:"",
         customerContact:"",
@@ -30,6 +31,7 @@ export default function CustomerDetails()
         }).catch((err)=>
         {
             console.log(err);
+            setError(err.response.data.errorMessage)
         })
     },[])
     
@@ -55,6 +57,7 @@ export default function CustomerDetails()
             }).catch((err)=>
             {
                 console.log(err);
+                setError(err.response.data.errorMessage)
             })
         }
 
@@ -67,6 +70,7 @@ export default function CustomerDetails()
             }).catch((err)=>
             {
                 console.log(err);
+                setError(err.response.data.errorMessage)
             });
 
     }
@@ -81,7 +85,7 @@ return(<div class="wrapper">
     <div class="recipientWrap">
         <form action="" class="recipientForm" onSubmit={handleSubmit} >
             <div>Recipient Details</div>
-            <div>{ErrorValidation.name && <span>{ErrorValidation.name} </span> } {ErrorValidation.contact && <span>{ErrorValidation.contact} </span> }{ErrorValidation.DoorNumber && <span>{ErrorValidation.DoorNumber} </span> }</div>
+            <div style={{color:"red"}}>{ error ? error : "" }{ErrorValidation.name && <span>{ErrorValidation.name} </span> } {ErrorValidation.contact && <span>{ErrorValidation.contact} </span> }{ErrorValidation.DoorNumber && <span>{ErrorValidation.DoorNumber} </span> }</div>
             <div class="inputBox">
                 <input type="text" name="customerName" onChange={handlechange} required placeholder="Name" />
                 

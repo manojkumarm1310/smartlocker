@@ -6,6 +6,7 @@ import axios from "axios";
 export default function Contactus()
 {
     const navigate=useNavigate();
+    const [error,setError]=useState("");
     const [query,setQuerys]=useState(
         {
             name:"",
@@ -28,6 +29,7 @@ export default function Contactus()
         }).catch((err)=>
         {
             console.log(err);
+            setError(err.response.data.errorMessage)
             // navigate("/");
             // window.alert("Server Error");
         })
@@ -45,6 +47,7 @@ export default function Contactus()
     <div class="Contactuscontent">
         <div><img src={locker} alt="Smart locker png" /></div>
         <div class="ContactuscontactWrap">
+        <div style={{color:"red",marginTop:"15px"}}>{error?error:""}</div>
             <form action="" class="ContactuscontactForm" onSubmit={handleSubmit}>
                 <div class="ContactusinputBox">
                     <input type="text" placeholder="Name" onChange={handlechange} name="name" required />
