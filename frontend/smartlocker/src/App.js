@@ -12,7 +12,18 @@ import Contactus from "./components/Contactus";
 import DoorNumberList from "./components/DoorNumberList";
 function App() {
 
-  
+  useEffect(() => {
+    const handlePopState = () => {
+      window.history.go(1);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
   return (
         <div>
           <BrowserRouter>
