@@ -286,7 +286,7 @@ export async function help(req,res){
                 from: process.env.EMAIL || "manojkumar20011013@gmail.com",
                 to: process.env.EMAIL || "manojkumar20011013@gmail.com",
                 subject: 'Response',
-                html:"Response from server",
+                // html:"Response from server",
                 text: `This message was sent by ${document.NAMES} and their contact is ${document.CONTACT}.The message is ${document.MESSAGES}`,
             };
             const mailResponse=await transporter.sendMail(mailOptions);
