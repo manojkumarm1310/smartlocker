@@ -13,13 +13,24 @@ import DoorNumberList from "./components/DoorNumberList";
 function App() {
 
   useEffect(() => {
+    const handleBeforeUnload = (event) => {
+        event.preventDefault();
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+}, []);
+
+  useEffect(() => {
     const handlePopState = () => {
       window.history.go(1);
     };
 
     window.addEventListener("popstate", handlePopState);
 
-    // Cleanup event listener on component unmount
     return () => {
       window.removeEventListener("popstate", handlePopState);
     };

@@ -42,8 +42,15 @@ export default function LockerSelection()
             var DoornumInt=parseInt(event.target.id);
 
             let selectedDoorID=document.getElementById(event.target.id);
+            
+            
             if(getComputedStyle(selectedDoorID).color !== "rgb(255, 0, 0)" )
             {
+                
+            if(currentSelectedDoor){
+                let prevDoorNumber=document.getElementById(currentSelectedDoor)
+                prevDoorNumber.classList.remove("selectedDoor");
+            }
             setcurrentSelectedDoor(DoornumInt);
             selectedDoorID.classList.toggle("selectedDoor");
 
