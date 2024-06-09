@@ -34,8 +34,15 @@ let selectedDoorNumber = [];
 export async function createDeliveryman(req,res)
 {
     try {
+
+        if(!req.body.name || !req.body.contact){
+            return res.status(500).json({ errorMessage:"Enter a Detail!" });
+        }
+
         OTP=generateOTP();
         let DeliveryTime = dateObject.toLocaleString();
+
+
         currentcourier.name = req.body.name;
         currentcourier.contact = req.body.contact;
         currentcourier.otp = OTP;
@@ -84,6 +91,10 @@ export async function createDeliveryman(req,res)
 
 export async function delivermanOTP(req,res){
     try {
+        if(!req.body.input){
+            return res.status(500).json({ errorMessage:"Enter a OTP!" });
+        }
+
         const getOTP = req.body.input;
         if (OTP !== getOTP) {
           return res.status(200).json('Incorrect');
@@ -97,6 +108,10 @@ export async function delivermanOTP(req,res){
 
 export async function LockerSelection(req,res){
     try {
+
+        if(!req.body.currentSelectedDoor){
+            return res.status(500).json({ errorMessage:"Door is not selected!" });
+        }
         selectedDoorNumber.push(req.body.currentSelectedDoor);
         const name = currentcourier.name;
         const contact = currentcourier.contact;
@@ -121,6 +136,14 @@ export async function LockerSelection(req,res){
 export async function customerDetails(req,res)
 {
     try {
+
+        if(!req.body.customerName || !req.body.customerContact || !req.body.DoorNumber){
+            return res.status(500).json({ errorMessage:"Enter a Detail!" });
+        }
+        if(!currentcourier){
+            return res.status(500).json({ errorMessage:"Try again!" });
+        }
+
         let status = "NOT COLLECTED";
         let dbData = {};
         let ReceiverOTP = "";
@@ -181,6 +204,10 @@ export async function customerDetails(req,res)
 
 export async function recipient(req,res){
     try {
+        if(!req.body.customerName || !req.body.customerContact){
+            return res.status(500).json({ errorMessage:"Enter a Detail!" });
+        }
+
         currentRecipientData.currentRecipientName = req.body.customerName;
         currentRecipientData.currentRecipientContact = req.body.customerContact;
         // currentRecipientData.currentRecipientDoorNumber=req.body.DoorNumber;
@@ -206,6 +233,12 @@ export async function recipient(req,res){
 
 export async function recipientOTP(req,res){
     try {
+        if(!req.body.input){
+            return res.status(500).json({ errorMessage:"Enter a OTP!" });
+        }
+        if(!currentRecipientData){
+            return res.status(500).json({ errorMessage:"Something went wrong,Try again!" });
+        }
         const RecipientOTP=req.body.input;
         console.log(RecipientOTP)
         let isOTPTrue=false;
@@ -216,6 +249,7 @@ export async function recipientOTP(req,res){
             CONTACT: currentRecipientData.currentRecipientContact,
             DOORNUMBER: currentRecipientSelectedDoor
         };
+        console.log(filter)
 
         let database=await getDatabase();
         const collection = database.collection('recipient');
@@ -261,6 +295,10 @@ export async function recipientOTP(req,res){
 
 export async function help(req,res){
     try {
+
+        if(!req.body.name || !req.body.contact || !req.body.messages){
+            return res.status(500).json({ errorMessage:"Enter a Detail!" });
+        }
         let database=await getDatabase();
         const collection = database.collection('querys');
         const document = {
@@ -309,6 +347,10 @@ export async function help(req,res){
 
 export async function GetRecipientOTP(req,res){
     try {
+
+        if(!currentRecipientData){
+            return res.status(500).json({ errorMessage:"Something went Wrong!" });
+        }
         let database=await getDatabase();
         const collection = database.collection('recipient');
         const query = {
@@ -350,6 +392,10 @@ export async function GetLockerSelection(req,res)
 
 export async function GetCustomerDetail(req,res){
     try {
+
+        if(!currentcourier || OTP){
+            return res.status(500).json({ errorMessage:"Something went wrong!" });
+        }
         let database=await getDatabase();
 
         const collection = database.collection('courier');
@@ -377,6 +423,10 @@ export async function GetCustomerDetail(req,res){
 export async function GetRecipient(req,res)
 {
     try {
+
+        if(!currentcourier){
+            return res.status(500).json({ errorMessage:"Something went wrong!" });
+        }
         let database=await getDatabase();
         const collection = database.collection('courier');
         const query = {
@@ -400,6 +450,10 @@ export async function GetRecipient(req,res)
 let currentRecipientSelectedDoor = undefined;
 
 export async function Doornumberlist(req,res){
+
+    if(!req.body.selectedDoor){
+        return res.status(500).json({ errorMessage:"Something went wrong!" });
+    }
     currentRecipientSelectedDoor = req.body.selectedDoor;
     return res.status(200).json(`Selected door is ${currentRecipientSelectedDoor}`);
 }
@@ -407,6 +461,9 @@ export async function Doornumberlist(req,res){
 export async function GetDoorNumberList(req,res)
 {
     try {
+        if(!currentRecipientData){
+            return res.status(500).json({ errorMessage:"Something went wrong!" });
+        }
         let database=await getDatabase();
         const collection = database.collection('recipient');
         const query = {
@@ -430,6 +487,9 @@ export async function GetDoorNumberList(req,res)
 export async function DeleteOTP(req,res)
 {
     try {
+        if(!currentcourier){
+            return res.status(500).json({ errorMessage:"Something went wrong!" });
+        }
         let database=await getDatabase();
         const collection = database.collection('courier');
         const query = {
@@ -453,6 +513,11 @@ export async function DeleteOTP(req,res)
 export async function DeleteLockerSelection(req,res)
 {
     try {
+
+        if(!currentcourier){
+            return res.status(500).json({ errorMessage:"Something went wrong!" });
+        }
+
         let database=await getDatabase();
         const collection = database.collection('courier');
         const query = {
@@ -475,6 +540,9 @@ export async function DeleteLockerSelection(req,res)
 
 export async function DeleteCustomerDetail(req,res){
     try {
+        if(!currentcourier){
+            return res.status(500).json({ errorMessage:"Something went wrong!" });
+        }
         let database=await getDatabase();
         const collection = database.collection('courier');
         const query = {
