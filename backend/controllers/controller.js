@@ -393,7 +393,7 @@ export async function GetLockerSelection(req,res)
 export async function GetCustomerDetail(req,res){
     try {
 
-        if(!currentcourier || OTP){
+        if(!currentcourier || !OTP){
             return res.status(500).json({ errorMessage:"Something went wrong!" });
         }
         let database=await getDatabase();
